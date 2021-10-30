@@ -1,5 +1,6 @@
 package com.ead.course.clients;
 
+import com.ead.course.dtos.CourseUserDto;
 import com.ead.course.dtos.ResponsePageDto;
 import com.ead.course.dtos.UserDto;
 import com.ead.course.services.UtilsService;
@@ -61,5 +62,19 @@ public class CourseClient {
             log.error("Error request /users/userId {} ", e);
         }
         return userDto;
+    }
+
+    public void postSubscriptionUserInCourse(UUID courseId, UUID userId) {
+        String url = REQUEST_URL_AUTHUSER + "/users/"+ userId + "/courses/subscription";
+        String result = null;
+        try {
+            var courseUserDto = new CourseUserDto();
+            courseUserDto.setCourseId(courseId);
+            courseUserDto.setUserId(userId);
+            result = restTemplate.postForObject(url, courseUserDto, String.class);
+        }catch (HttpStatusCodeException e){
+            log.error("Error request /users/userId/courses/subscription {} ", e);
+        }
+        log.info("Result: {} ", result);
     }
 }

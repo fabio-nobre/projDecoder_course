@@ -57,7 +57,7 @@ public class CourseUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found or user is blocked.");
         }
         CourseUserModel courseUserModel = courseUserService.save(courseModelOptional.get().convertToCourseUserModel(subscriptionDto.getUserId()));
-
+        courseClient.postSubscriptionUserInCourse(courseModelOptional.get().getCourseId(), courseUserModel.getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body("Subscription created successfully.");
     }
 }
