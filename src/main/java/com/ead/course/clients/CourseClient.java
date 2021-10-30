@@ -48,4 +48,18 @@ public class CourseClient {
         log.info("Ending request /users courseId {} ", courseId);
         return new PageImpl<>(searchResult);
     }
+
+    public UserDto getOneUserById(UUID userId){
+        UserDto userDto = null;
+        String url = REQUEST_URL_AUTHUSER + "/users/" + userId;
+        log.debug("Request URL: {} ", url);
+        log.info("Request URL: {} ", url);
+        try{
+            ResponseEntity<UserDto> response = restTemplate.exchange(url, HttpMethod.GET, null, UserDto.class);
+            userDto = response.getBody();
+        } catch(HttpStatusCodeException e){
+            log.error("Error request /users/userId {} ", e);
+        }
+        return userDto;
+    }
 }
