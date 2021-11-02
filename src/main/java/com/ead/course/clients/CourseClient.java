@@ -1,6 +1,5 @@
 package com.ead.course.clients;
 
-import com.ead.course.dtos.CourseUserDto;
 import com.ead.course.dtos.ResponsePageDto;
 import com.ead.course.dtos.UserDto;
 import com.ead.course.services.UtilsService;
@@ -50,31 +49,4 @@ public class CourseClient {
         return new PageImpl<>(searchResult);
     }
 
-    public UserDto getOneUserById(UUID userId){
-        UserDto userDto = null;
-        String url = REQUEST_URL_AUTHUSER + "/users/" + userId;
-        log.debug("Request URL: {} ", url);
-        log.info("Request URL: {} ", url);
-        try{
-            ResponseEntity<UserDto> response = restTemplate.exchange(url, HttpMethod.GET, null, UserDto.class);
-            userDto = response.getBody();
-        } catch(HttpStatusCodeException e){
-            log.error("Error request /users/userId {} ", e);
-        }
-        return userDto;
-    }
-
-    public void postSubscriptionUserInCourse(UUID courseId, UUID userId) {
-        String url = REQUEST_URL_AUTHUSER + "/users/"+ userId + "/courses/subscription";
-        String result = null;
-        try {
-            var courseUserDto = new CourseUserDto();
-            courseUserDto.setCourseId(courseId);
-            courseUserDto.setUserId(userId);
-            result = restTemplate.postForObject(url, courseUserDto, String.class);
-        }catch (HttpStatusCodeException e){
-            log.error("Error request /users/userId/courses/subscription {} ", e);
-        }
-        log.info("Result: {} ", result);
-    }
 }

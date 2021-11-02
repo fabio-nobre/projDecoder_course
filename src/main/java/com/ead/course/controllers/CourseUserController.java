@@ -52,12 +52,9 @@ public class CourseUserController {
         if(courseUserService.existsByCourseAndUserId(courseModelOptional.get(), subscriptionDto.getUserId())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: subscription already exists!");
         }
-        UserDto userDto = courseClient.getOneUserById(subscriptionDto.getUserId());
-        if(userDto == null || userDto.getUserStatus().equals(UserStatus.BLOCKED)){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found or user is blocked.");
-        }
+        //verificação para user
         CourseUserModel courseUserModel = courseUserService.save(courseModelOptional.get().convertToCourseUserModel(subscriptionDto.getUserId()));
-        courseClient.postSubscriptionUserInCourse(courseModelOptional.get().getCourseId(), courseUserModel.getUserId());
+
         return ResponseEntity.status(HttpStatus.CREATED).body("Subscription created successfully.");
     }
 }
