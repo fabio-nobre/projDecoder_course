@@ -49,7 +49,7 @@ public class ModuleController {
         moduleModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         moduleModel.setCourse(courseModelOptional.get());
         moduleService.save(moduleModel);
-        log.debug("POST saveModule moduleModel saved {} ", moduleModel.toString());
+        log.debug("POST saveModule moduleId saved {} ", moduleModel.getModuleId());
         log.info("Module saved successfully moduleId {} ", moduleModel.getModuleId());
         return ResponseEntity.status(HttpStatus.CREATED).body(moduleModel);
     }
@@ -81,7 +81,7 @@ public class ModuleController {
         moduleModel.setTitle(moduleDto.getTitle());
         moduleModel.setDescription(moduleDto.getDescription());
         moduleService.save(moduleModel);
-        log.debug("PUT updateModule moduleModel saved {} ", moduleModel.toString());
+        log.debug("PUT updateModule moduleId saved {} ", moduleModel.getModuleId());
         log.info("Module updated successfully moduleId {} ", moduleModel.getModuleId());
         return ResponseEntity.status(HttpStatus.OK).body(moduleModel);
     }

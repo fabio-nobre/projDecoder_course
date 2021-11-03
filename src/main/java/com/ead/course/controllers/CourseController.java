@@ -48,7 +48,7 @@ public class CourseController {
         courseModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         courseService.save(courseModel);
-        log.debug("POST saveCourse courseModel saved {} ", courseModel.toString());
+        log.debug("POST saveCourse courseId saved {} ", courseModel.getCourseId());
         log.info("Course saved successfully courseId {} ", courseModel.getCourseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
     }
@@ -82,7 +82,7 @@ public class CourseController {
         courseModel.setCourseLevel(courseDto.getCourseLevel());
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         courseService.save(courseModel);
-        log.debug("PUT updateCourse courseModel saved {} ", courseModel.toString());
+        log.debug("PUT updateCourse courseId saved {} ", courseModel.getCourseId());
         log.info("Course updated successfully courseId {} ", courseModel.getCourseId());
         return ResponseEntity.status(HttpStatus.OK).body(courseModel);
     }
