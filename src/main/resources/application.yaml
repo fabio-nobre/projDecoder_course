@@ -37,6 +37,9 @@ ead:
   api:
     url:
       authuser: 'http://ead-authuser-service/ead-authuser'
+  broker:
+    exchange:
+      userEvent: ead.userevent
 
 eureka:
   client:
