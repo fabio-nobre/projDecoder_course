@@ -22,6 +22,8 @@ spring:
   output:
     ansi:
       enabled: Always
+  rabbitmq:
+    addresses: amqps://ddtlimyk:2u6UzpiatGwZKndKlHYY2acgkJvjdgQz@woodpecker.rmq.cloudamqp.com/ddtlimyk
 
 
 logging:
