@@ -33,7 +33,7 @@ public class CourseUserController {
 
     @GetMapping("/courses/{courseId}/users")
     public ResponseEntity<Object> getAllUsersByCourse(SpecificationTemplate.UserSpec spec,
-                                                      @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
+                                                        @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                       @PathVariable(value = "courseId") UUID courseId){
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
         if(!courseModelOptional.isPresent()){
@@ -60,7 +60,6 @@ public class CourseUserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User is blocked.");
         }
         courseService.saveSubscriptionUserInCourse(courseModelOptional.get().getCourseId(), userModelOptional.get().getUserId());
-
         return ResponseEntity.status(HttpStatus.CREATED).body("Subscription created successfully.");
     }
 }

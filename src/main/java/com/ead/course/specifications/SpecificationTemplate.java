@@ -77,4 +77,6 @@ public class SpecificationTemplate {
             return cb.and(cb.equal(user.get("userId"), userId), cb.isMember(course, usersCourses));
         };
     }
+
+
 }
